@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
+import Sidebar from "./Sidebar";
 
 const Feed = () => (
   // Implemented logic where if we`re viewing on a PC or a tablet (md+) all videos are going to go in rows (horizontally),
@@ -14,7 +15,17 @@ const Feed = () => (
           px: { sx: 0, md: 2 },
         },
       }}
-    ></Box>
+    >
+      <Sidebar />
+
+      <Typography
+        className="copyright"
+        variant="body2"
+        sx={{ mt: 5, color: "#fff" }}
+      >
+        Copyright 2024 Beyond Dreams.
+      </Typography>
+    </Box>
   </Stack>
 );
 
