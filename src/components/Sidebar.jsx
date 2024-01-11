@@ -4,6 +4,7 @@ import { categories } from "../utils/constants";
 
 const Sidebar = ({ selectedCategory, setSelectedCategory }) => (
   <Stack
+    position="sticky"
     direction="row"
     sx={{
       overflowY: "auto",
