@@ -6,7 +6,7 @@ const Videos = ({ videos, channel }) => {
   return (
     <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={2}>
       {channel && (
-        <Box key={channel?.id?.channelId}>
+        <Box key={channel?.id}>
           {channel && <ChannelCard channelDetail={channel} />}
         </Box>
       )}

@@ -16,8 +16,6 @@ const Feed = () => {
       });
   }, [selectedCategory]);
 
-  console.log({ ...videos });
-
   useEffect(() => {
     fetchChannelFromAPI(
       `channels?part=snippet&id=${videos[0]?.snippet?.channelId}`
@@ -27,6 +25,8 @@ const Feed = () => {
         console.log(error);
       });
   }, [videos]);
+
+  console.log(channel);
 
   // Implemented logic where if we`re viewing on a PC or a tablet (md+) all videos are going to go in rows (horizontally),
   // but when it`s on a mobile phone (sx) - it`s going to be shown vertically stacked (in a column)
@@ -66,7 +66,7 @@ const Feed = () => {
           {selectedCategory} <span style={{ color: "#FC5103" }}>videos</span>
         </Typography>
 
-        <Videos videos={videos} channel={channel} />
+        <Videos videos={videos} channel={channel && channel[0]} />
       </Box>
     </Stack>
   );

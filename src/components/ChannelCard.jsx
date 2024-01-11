@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 
 import { demoProfilePicture } from "../utils/constants";
 
-const ChannelCard = ({ channelDetail }) => {
+const ChannelCard = ({
+  channelDetail: {
+    id,
+    snippet: { thumbnails, title },
+    brandingSettings,
+  },
+}) => {
   return (
     <Box sx={{ boxShadow: "none", borderRadius: "20px" }}>
-      <Link to={`/channel/${channelDetail?.id}`}>
+      <Link to={`/channel/${id}`}>
         <CardContent
           sx={{
             display: "flex",
@@ -18,12 +24,10 @@ const ChannelCard = ({ channelDetail }) => {
           }}
         >
           <CardMedia
-            image={
-              channelDetail[0]?.snippet?.thumbnails?.high?.url ||
-              demoProfilePicture
-            }
-            alt={channelDetail[0]?.snippet?.title}
-            sx={{ borderRadius: "50$", height: "180px", width: "180px" }}
+            component="img"
+            src={thumbnails?.high?.url || demoProfilePicture}
+            alt={title}
+            sx={{ borderRadius: "50%", height: "180px", width: "180px" }}
           />
         </CardContent>
       </Link>
