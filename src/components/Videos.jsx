@@ -1,18 +1,27 @@
-import React from "react";
 import { Stack, Box } from "@mui/material";
 import { ChannelCard, VideoCard } from "./";
 
-const Videos = ({ videos, channel }) => {
+const Videos = ({ videos, channelId }) => {
+  const marginTop = channelId ? null : "20px";
+
   return (
-    <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={2}>
-      {channel && (
-        <Box key={channel?.id}>
-          {channel && <ChannelCard channelDetail={channel} />}
+    <Stack
+      direction="row"
+      flexWrap="wrap"
+      justifyContent="start"
+      gap={2}
+      marginTop={marginTop}
+    >
+      {channelId && (
+        <Box key={channelId}>
+          <ChannelCard channelId={channelId} />
         </Box>
       )}
-      {videos.map((item, idx) => (
-        <Box key={idx}>{item.id.videoId && <VideoCard video={item} />}</Box>
-      ))}
+      {videos
+        .filter((video) => video?.id?.videoId)
+        .map((item, idx) => (
+          <Box key={idx}>{item?.id?.videoId && <VideoCard video={item} />}</Box>
+        ))}
     </Stack>
   );
 };

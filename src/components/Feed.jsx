@@ -1,32 +1,23 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { Sidebar, Videos } from "./";
-import { fetchVideosFromAPI, fetchChannelFromAPI } from "../utils/fetchFromAPI";
+import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
-  const [channel, setChannel] = useState([]);
+
+  const maxResults = 30;
 
   useEffect(() => {
-    fetchVideosFromAPI(`search?part=snippet&q=${selectedCategory}`)
+    fetchFromAPI(
+      `search?part=snippet&q=${selectedCategory}&maxResults=${maxResults}`
+    )
       .then((data) => setVideos(data.items))
       .catch(function (error) {
         console.log(error);
       });
   }, [selectedCategory]);
-
-  useEffect(() => {
-    fetchChannelFromAPI(
-      `channels?part=snippet&id=${videos[0]?.snippet?.channelId}`
-    )
-      .then((data) => setChannel(data.items))
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [videos]);
-
-  console.log(channel);
 
   // Implemented logic where if we`re viewing on a PC or a tablet (md+) all videos are going to go in rows (horizontally),
   // but when it`s on a mobile phone (sx) - it`s going to be shown vertically stacked (in a column)
@@ -37,9 +28,9 @@ const Feed = () => {
           height: {
             sx: "auto",
             md: "92vh",
-            borderRight: "1px solid #3d3d3d",
-            px: { sx: 0, md: 2 },
           },
+          borderRight: "1px solid #3d3d3d",
+          px: { sx: 0, md: 2 },
         }}
       >
         <Sidebar
@@ -66,7 +57,7 @@ const Feed = () => {
           {selectedCategory} <span style={{ color: "#FC5103" }}>videos</span>
         </Typography>
 
-        <Videos videos={videos} channel={channel && channel[0]} />
+        <Videos videos={videos} channelId={videos[0]?.snippet?.channelId} />
       </Box>
     </Stack>
   );
