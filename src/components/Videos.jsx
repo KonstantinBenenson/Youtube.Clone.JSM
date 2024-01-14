@@ -1,14 +1,16 @@
 import { Stack, Box } from "@mui/material";
 import { ChannelCard, VideoCard } from "./";
 
-const Videos = ({ videos, channelId }) => {
+const Videos = ({ videos, channelId, direction }) => {
+  if (!videos?.length) return "Loading...";
+
   const marginTop = channelId ? null : "20px";
 
   return (
     <Stack
-      direction="row"
+      direction={direction || "row"}
       flexWrap="wrap"
-      justifyContent="start"
+      justifyContent="center"
       gap={2}
       marginTop={marginTop}
     >
