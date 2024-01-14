@@ -14,7 +14,7 @@ const Feed = () => {
       `search?part=snippet&q=${selectedCategory}&maxResults=${maxResults}`
     )
       .then((data) => setVideos(data.items))
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }, [selectedCategory]);

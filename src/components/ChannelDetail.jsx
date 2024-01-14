@@ -15,7 +15,6 @@ const ChannelDetail = () => {
       `search?channelId=${id}&part=snippet&order=date&maxResults=${maxResults}`
     )
       .then((data) => {
-        console.log(data);
         setVideos(data?.items);
       })
       .catch((error) => {
@@ -38,9 +37,8 @@ const ChannelDetail = () => {
         <ChannelCard channelId={id} marginTop="-110px" />
       </Box>
       <Box display="flex" p="2">
-        <Box sx={{ mr: { sm: "100px" } }}>
-          <Videos videos={videos} />
-        </Box>
+        <Box sx={{ mr: { sm: "180px" } }} />
+        <Videos videos={videos} />
       </Box>
     </Box>
   );
